@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCInventoryManager", "CCInventoryManager\CCInventoryManager.csproj", "{452731B4-9335-4973-80F1-ED6031F0F829}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCInventoryManager.Tests", "CCInventoryManager.Tests\CCInventoryManager.Tests.csproj", "{B69D1354-05DB-4D55-B0E4-884DE9F0280F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{452731B4-9335-4973-80F1-ED6031F0F829}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{452731B4-9335-4973-80F1-ED6031F0F829}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{452731B4-9335-4973-80F1-ED6031F0F829}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{452731B4-9335-4973-80F1-ED6031F0F829}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B69D1354-05DB-4D55-B0E4-884DE9F0280F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B69D1354-05DB-4D55-B0E4-884DE9F0280F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B69D1354-05DB-4D55-B0E4-884DE9F0280F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B69D1354-05DB-4D55-B0E4-884DE9F0280F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
