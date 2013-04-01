@@ -11,6 +11,7 @@
           <EntitySet Name="Item" EntityType="CCINVModel.Store.Item" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Manufacturer" EntityType="CCINVModel.Store.Manufacturer" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Order" EntityType="CCINVModel.Store.Order" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OrderItems" EntityType="CCINVModel.Store.OrderItems" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PaymentInfo" EntityType="CCINVModel.Store.PaymentInfo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Shipper" EntityType="CCINVModel.Store.Shipper" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Warehouse" EntityType="CCINVModel.Store.Warehouse" store:Type="Tables" Schema="dbo" />
@@ -33,6 +34,14 @@
           <AssociationSet Name="FK_Order_Shipper" Association="CCINVModel.Store.FK_Order_Shipper">
             <End Role="Shipper" EntitySet="Shipper" />
             <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderItems_Item" Association="CCINVModel.Store.FK_OrderItems_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderItems_Order" Association="CCINVModel.Store.FK_OrderItems_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
@@ -58,7 +67,6 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Order_ID" Type="int" />
           <Property Name="Manufacturer_ID" Type="int" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Description" Type="varchar" MaxLength="50" />
@@ -78,6 +86,14 @@
           <Property Name="Customer_ID" Type="int" />
           <Property Name="Shipper_ID" Type="int" />
           <Property Name="PaymentInfo_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Item_ID" Type="int" />
+          <Property Name="Order_ID" Type="int" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="PaymentInfo">
           <Key>
@@ -167,6 +183,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderItems_Item">
+          <End Role="Item" Type="CCINVModel.Store.Item" Multiplicity="0..1" />
+          <End Role="OrderItems" Type="CCINVModel.Store.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="Item_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderItems_Order">
+          <End Role="Order" Type="CCINVModel.Store.Order" Multiplicity="0..1" />
+          <End Role="OrderItems" Type="CCINVModel.Store.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -204,6 +244,15 @@
             <End Role="Shipper" EntitySet="Shippers" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
+          <EntitySet Name="OrderItems" EntityType="CCINVModel.OrderItem" />
+          <AssociationSet Name="FK_OrderItems_Item" Association="CCINVModel.FK_OrderItems_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="OrderItem" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderItems_Order" Association="CCINVModel.FK_OrderItems_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderItem" EntitySet="OrderItems" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -231,12 +280,12 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Order_ID" Type="Int32" />
           <Property Name="Manufacturer_ID" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Inventories" Relationship="CCINVModel.FK_Inventory_Item" FromRole="Item" ToRole="Inventory" />
           <NavigationProperty Name="Manufacturer" Relationship="CCINVModel.FK_Item_Manufacturer" FromRole="Item" ToRole="Manufacturer" />
+          <NavigationProperty Name="OrderItems" Relationship="CCINVModel.FK_OrderItems_Item" FromRole="Item" ToRole="OrderItem" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
@@ -257,6 +306,7 @@
           <NavigationProperty Name="Customer" Relationship="CCINVModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="PaymentInfo" Relationship="CCINVModel.FK_Order_PaymentInfo" FromRole="Order" ToRole="PaymentInfo" />
           <NavigationProperty Name="Shipper" Relationship="CCINVModel.FK_Order_Shipper" FromRole="Order" ToRole="Shipper" />
+          <NavigationProperty Name="OrderItems" Relationship="CCINVModel.FK_OrderItems_Order" FromRole="Order" ToRole="OrderItem" />
         </EntityType>
         <EntityType Name="PaymentInfo">
           <Key>
@@ -361,6 +411,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="OrderItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="Item_ID" />
+          <Property Type="Int32" Name="Order_ID" />
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Item" Relationship="CCINVModel.FK_OrderItems_Item" FromRole="OrderItem" ToRole="Item" />
+          <NavigationProperty Name="Order" Relationship="CCINVModel.FK_OrderItems_Order" FromRole="OrderItem" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_OrderItems_Item">
+          <End Type="CCINVModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="CCINVModel.OrderItem" Role="OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="Item_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderItems_Order">
+          <End Type="CCINVModel.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="CCINVModel.OrderItem" Role="OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -391,7 +475,6 @@
             <EntityTypeMapping TypeName="CCINVModel.Item">
               <MappingFragment StoreEntitySet="Item">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
                 <ScalarProperty Name="Manufacturer_ID" ColumnName="Manufacturer_ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -444,6 +527,15 @@
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Zip" ColumnName="Zip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderItems">
+            <EntityTypeMapping TypeName="CCINVModel.OrderItem">
+              <MappingFragment StoreEntitySet="OrderItems">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

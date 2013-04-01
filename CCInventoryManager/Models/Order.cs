@@ -14,6 +14,11 @@ namespace CCInventoryManager.Models
     
     public partial class Order
     {
+        public Order()
+        {
+            this.OrderItems = new HashSet<OrderItem>();
+        }
+    
         public int ID { get; set; }
         public Nullable<int> Customer_ID { get; set; }
         public Nullable<int> Shipper_ID { get; set; }
@@ -22,5 +27,6 @@ namespace CCInventoryManager.Models
         public virtual Customer Customer { get; set; }
         public virtual PaymentInfo PaymentInfo { get; set; }
         public virtual Shipper Shipper { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }

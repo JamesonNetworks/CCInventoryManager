@@ -33,5 +33,6 @@ namespace CCInventoryManager.Models
         public DbSet<PaymentInfo> PaymentInfoes { get; set; }
         public DbSet<Shipper> Shippers { get; set; }
         public DbSet<Warehouse> Warehouses { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
     }
 }

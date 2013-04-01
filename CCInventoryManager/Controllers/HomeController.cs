@@ -22,6 +22,7 @@ namespace CCInventoryManager.Controllers
             db_populater test = new db_populater();
             //test.populateCustomers();
             //test.populateManufacturers();
+            test.populateItems();
             return View();
         }
         public ActionResult About()

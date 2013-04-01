@@ -201,6 +201,9 @@
     <Compile Include="Models\Order.cs">
       <DependentUpon>MainAppModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderItem.cs">
+      <DependentUpon>MainAppModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PaymentInfo.cs">
       <DependentUpon>MainAppModel.tt</DependentUpon>
     </Compile>

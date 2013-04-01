@@ -45,7 +45,6 @@ namespace CCInventoryManager.db_populate
                     thisCustomer.LastName = lname;
                     thisCustomer.Email = fname + "." + lname + email_add;
                     _db.Customers.Add(thisCustomer);
-                    _db.SaveChanges();
                 }
             }
             try
@@ -78,13 +77,51 @@ namespace CCInventoryManager.db_populate
             {
                 thisManufacturer.Name = name;
                 _db.Manufacturers.Add(thisManufacturer);
-                _db.SaveChanges();
             }
             try
             {
                 _db.SaveChanges();
             }
             catch (Exception e) 
+            {
+                //Do nothing yet
+            }
+        }
+
+        public void populateItems() 
+        {
+            CCINVEntities _db = new CCINVEntities();
+            Item thisItem = new Item();
+
+            List<string> FirstWord = new List<string>();
+            List<string> SecondWord = new List<string>();
+
+            FirstWord.Add("Small");
+            FirstWord.Add("Medium");
+            FirstWord.Add("Large");
+
+            SecondWord.Add("Coffee");
+            SecondWord.Add("Styrofoam");
+            SecondWord.Add("Insulated");
+
+            for (int i = 1; i < 10; i++)
+            {
+                foreach (string fword in FirstWord)
+                {
+                    foreach (string sword in SecondWord)
+                    {
+                        thisItem.Manufacturer_ID = i;
+                        thisItem.Name = fword + " " + sword + " cup";
+                        _db.Items.Add(thisItem);
+                        _db.SaveChanges();
+                    }
+                }
+            }
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception e)
             {
                 //Do nothing yet
             }

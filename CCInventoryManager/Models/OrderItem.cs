@@ -12,21 +12,13 @@ namespace CCInventoryManager.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Item
+    public partial class OrderItem
     {
-        public Item()
-        {
-            this.Inventories = new HashSet<Inventory>();
-            this.OrderItems = new HashSet<OrderItem>();
-        }
-    
+        public Nullable<int> Item_ID { get; set; }
+        public Nullable<int> Order_ID { get; set; }
         public int ID { get; set; }
-        public Nullable<int> Manufacturer_ID { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
     
-        public virtual ICollection<Inventory> Inventories { get; set; }
-        public virtual Manufacturer Manufacturer { get; set; }
-        public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public virtual Item Item { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

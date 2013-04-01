@@ -19,6 +19,9 @@
         <AssociationConnector Association="CCINVModel.FK_Item_Manufacturer" ManuallyRouted="false" />
         <AssociationConnector Association="CCINVModel.FK_Order_PaymentInfo" ManuallyRouted="false" />
         <AssociationConnector Association="CCINVModel.FK_Order_Shipper" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CCINVModel.OrderItem" Width="1.5" PointX="3.125" PointY="6.75" />
+        <AssociationConnector Association="CCINVModel.FK_OrderItems_Item" />
+        <AssociationConnector Association="CCINVModel.FK_OrderItems_Order" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
