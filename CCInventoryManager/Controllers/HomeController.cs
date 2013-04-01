@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CCInventoryManager.db_populate;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,6 +16,13 @@ namespace CCInventoryManager.Controllers
             return View();
         }
 
+        public ActionResult Populate()
+        {
+            ViewBag.Message = "Populated the database";
+            db_populater test = new db_populater();
+            test.populate();
+            return View();
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";

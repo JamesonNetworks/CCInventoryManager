@@ -1,0 +1,489 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CCINVModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="CCINVModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="CCINVModel.Store.Customer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Inventory" EntityType="CCINVModel.Store.Inventory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Item" EntityType="CCINVModel.Store.Item" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Manufacturer" EntityType="CCINVModel.Store.Manufacturer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Order" EntityType="CCINVModel.Store.Order" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PaymentInfo" EntityType="CCINVModel.Store.PaymentInfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Shipper" EntityType="CCINVModel.Store.Shipper" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Warehouse" EntityType="CCINVModel.Store.Warehouse" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Inventory_Item" Association="CCINVModel.Store.FK_Inventory_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Inventory" EntitySet="Inventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Warehouse" Association="CCINVModel.Store.FK_Inventory_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="Inventory" EntitySet="Inventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Manufacturer" Association="CCINVModel.Store.FK_Item_Manufacturer">
+            <End Role="Manufacturer" EntitySet="Manufacturer" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Customer" Association="CCINVModel.Store.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_PaymentInfo" Association="CCINVModel.Store.FK_Order_PaymentInfo">
+            <End Role="PaymentInfo" EntitySet="PaymentInfo" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Shipper" Association="CCINVModel.Store.FK_Order_Shipper">
+            <End Role="Shipper" EntitySet="Shipper" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Inventory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Item_ID" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Warehouse_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Order_ID" Type="int" />
+          <Property Name="Manufacturer_ID" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Manufacturer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Customer_ID" Type="int" />
+          <Property Name="Shipper_ID" Type="int" />
+          <Property Name="PaymentInfo_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="PaymentInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Method" Type="varchar" MaxLength="50" />
+          <Property Name="CC" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="Zip" Type="varchar" MaxLength="50" />
+          <Property Name="Customer_ID" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Shipper">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="Zip" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Inventory_Item">
+          <End Role="Item" Type="CCINVModel.Store.Item" Multiplicity="0..1" />
+          <End Role="Inventory" Type="CCINVModel.Store.Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="Item_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Warehouse">
+          <End Role="Warehouse" Type="CCINVModel.Store.Warehouse" Multiplicity="0..1" />
+          <End Role="Inventory" Type="CCINVModel.Store.Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="Warehouse_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Manufacturer">
+          <End Role="Manufacturer" Type="CCINVModel.Store.Manufacturer" Multiplicity="0..1" />
+          <End Role="Item" Type="CCINVModel.Store.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="Manufacturer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Customer">
+          <End Role="Customer" Type="CCINVModel.Store.Customer" Multiplicity="0..1" />
+          <End Role="Order" Type="CCINVModel.Store.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_PaymentInfo">
+          <End Role="PaymentInfo" Type="CCINVModel.Store.PaymentInfo" Multiplicity="0..1" />
+          <End Role="Order" Type="CCINVModel.Store.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="PaymentInfo_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Shipper">
+          <End Role="Shipper" Type="CCINVModel.Store.Shipper" Multiplicity="0..1" />
+          <End Role="Order" Type="CCINVModel.Store.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipper">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Shipper_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CCINVModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CCINVEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="CCINVModel.Customer" />
+          <EntitySet Name="Inventories" EntityType="CCINVModel.Inventory" />
+          <EntitySet Name="Items" EntityType="CCINVModel.Item" />
+          <EntitySet Name="Manufacturers" EntityType="CCINVModel.Manufacturer" />
+          <EntitySet Name="Orders" EntityType="CCINVModel.Order" />
+          <EntitySet Name="PaymentInfoes" EntityType="CCINVModel.PaymentInfo" />
+          <EntitySet Name="Shippers" EntityType="CCINVModel.Shipper" />
+          <EntitySet Name="Warehouses" EntityType="CCINVModel.Warehouse" />
+          <AssociationSet Name="FK_Order_Customer" Association="CCINVModel.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Item" Association="CCINVModel.FK_Inventory_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Inventory" EntitySet="Inventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Warehouse" Association="CCINVModel.FK_Inventory_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="Inventory" EntitySet="Inventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Manufacturer" Association="CCINVModel.FK_Item_Manufacturer">
+            <End Role="Manufacturer" EntitySet="Manufacturers" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_PaymentInfo" Association="CCINVModel.FK_Order_PaymentInfo">
+            <End Role="PaymentInfo" EntitySet="PaymentInfoes" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Shipper" Association="CCINVModel.FK_Order_Shipper">
+            <End Role="Shipper" EntitySet="Shippers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Orders" Relationship="CCINVModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Inventory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Item_ID" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Warehouse_ID" Type="Int32" />
+          <NavigationProperty Name="Item" Relationship="CCINVModel.FK_Inventory_Item" FromRole="Inventory" ToRole="Item" />
+          <NavigationProperty Name="Warehouse" Relationship="CCINVModel.FK_Inventory_Warehouse" FromRole="Inventory" ToRole="Warehouse" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Order_ID" Type="Int32" />
+          <Property Name="Manufacturer_ID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Inventories" Relationship="CCINVModel.FK_Inventory_Item" FromRole="Item" ToRole="Inventory" />
+          <NavigationProperty Name="Manufacturer" Relationship="CCINVModel.FK_Item_Manufacturer" FromRole="Item" ToRole="Manufacturer" />
+        </EntityType>
+        <EntityType Name="Manufacturer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Items" Relationship="CCINVModel.FK_Item_Manufacturer" FromRole="Manufacturer" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Customer_ID" Type="Int32" />
+          <Property Name="Shipper_ID" Type="Int32" />
+          <Property Name="PaymentInfo_ID" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="CCINVModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="PaymentInfo" Relationship="CCINVModel.FK_Order_PaymentInfo" FromRole="Order" ToRole="PaymentInfo" />
+          <NavigationProperty Name="Shipper" Relationship="CCINVModel.FK_Order_Shipper" FromRole="Order" ToRole="Shipper" />
+        </EntityType>
+        <EntityType Name="PaymentInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Method" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CC" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="City" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="State" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Zip" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Customer_ID" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Orders" Relationship="CCINVModel.FK_Order_PaymentInfo" FromRole="PaymentInfo" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Shipper">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Orders" Relationship="CCINVModel.FK_Order_Shipper" FromRole="Shipper" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="State" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Zip" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Inventories" Relationship="CCINVModel.FK_Inventory_Warehouse" FromRole="Warehouse" ToRole="Inventory" />
+        </EntityType>
+        <Association Name="FK_Order_Customer">
+          <End Role="Customer" Type="CCINVModel.Customer" Multiplicity="0..1" />
+          <End Role="Order" Type="CCINVModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Item">
+          <End Role="Item" Type="CCINVModel.Item" Multiplicity="0..1" />
+          <End Role="Inventory" Type="CCINVModel.Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="Item_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Warehouse">
+          <End Role="Warehouse" Type="CCINVModel.Warehouse" Multiplicity="0..1" />
+          <End Role="Inventory" Type="CCINVModel.Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="Warehouse_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Manufacturer">
+          <End Role="Manufacturer" Type="CCINVModel.Manufacturer" Multiplicity="0..1" />
+          <End Role="Item" Type="CCINVModel.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="Manufacturer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_PaymentInfo">
+          <End Role="PaymentInfo" Type="CCINVModel.PaymentInfo" Multiplicity="0..1" />
+          <End Role="Order" Type="CCINVModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="PaymentInfo_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Shipper">
+          <End Role="Shipper" Type="CCINVModel.Shipper" Multiplicity="0..1" />
+          <End Role="Order" Type="CCINVModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipper">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Shipper_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CCINVModelStoreContainer" CdmEntityContainer="CCINVEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="CCINVModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventories">
+            <EntityTypeMapping TypeName="CCINVModel.Inventory">
+              <MappingFragment StoreEntitySet="Inventory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Warehouse_ID" ColumnName="Warehouse_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="CCINVModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Manufacturer_ID" ColumnName="Manufacturer_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manufacturers">
+            <EntityTypeMapping TypeName="CCINVModel.Manufacturer">
+              <MappingFragment StoreEntitySet="Manufacturer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="CCINVModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="Shipper_ID" ColumnName="Shipper_ID" />
+                <ScalarProperty Name="PaymentInfo_ID" ColumnName="PaymentInfo_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentInfoes">
+            <EntityTypeMapping TypeName="CCINVModel.PaymentInfo">
+              <MappingFragment StoreEntitySet="PaymentInfo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Method" ColumnName="Method" />
+                <ScalarProperty Name="CC" ColumnName="CC" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shippers">
+            <EntityTypeMapping TypeName="CCINVModel.Shipper">
+              <MappingFragment StoreEntitySet="Shipper">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Warehouses">
+            <EntityTypeMapping TypeName="CCINVModel.Warehouse">
+              <MappingFragment StoreEntitySet="Warehouse">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

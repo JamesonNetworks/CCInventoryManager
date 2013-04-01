@@ -165,51 +165,52 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Customer.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
+    <Compile Include="db_populate\db_populater.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Inventory.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Item.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Manufacturer.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model2.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model2.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model2.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Inv.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Inv.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Order.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>MainAppModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="PaymentInfo.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
+    <Compile Include="Models\Inventory.cs">
+      <DependentUpon>MainAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Item.cs">
+      <DependentUpon>MainAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MainAppModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainAppModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MainAppModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MainAppModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainAppModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Manufacturer.cs">
+      <DependentUpon>MainAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>MainAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PaymentInfo.cs">
+      <DependentUpon>MainAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Shipper.cs">
+      <DependentUpon>MainAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Warehouse.cs">
+      <DependentUpon>MainAppModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shipper.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Warehouse.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -268,22 +269,22 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <EntityDeploy Include="Inv.edmx">
+    <EntityDeploy Include="Models\MainAppModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Inv.Designer.cs</LastGenOutput>
+      <LastGenOutput>MainAppModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Model2.Context.tt">
+    <Content Include="Models\MainAppModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Inv.edmx</DependentUpon>
-      <LastGenOutput>Model2.Context.cs</LastGenOutput>
+      <DependentUpon>MainAppModel.edmx</DependentUpon>
+      <LastGenOutput>MainAppModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Inv.edmx.diagram">
-      <DependentUpon>Inv.edmx</DependentUpon>
+    <Content Include="Models\MainAppModel.edmx.diagram">
+      <DependentUpon>MainAppModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Model2.tt">
+    <Content Include="Models\MainAppModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Inv.edmx</DependentUpon>
-      <LastGenOutput>Model2.cs</LastGenOutput>
+      <DependentUpon>MainAppModel.edmx</DependentUpon>
+      <LastGenOutput>MainAppModel.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
@@ -339,6 +340,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Home\Populate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
