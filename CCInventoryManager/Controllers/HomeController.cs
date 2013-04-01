@@ -20,7 +20,8 @@ namespace CCInventoryManager.Controllers
         {
             ViewBag.Message = "Populated the database";
             db_populater test = new db_populater();
-            test.populate();
+            //test.populateCustomers();
+            //test.populateManufacturers();
             return View();
         }
         public ActionResult About()

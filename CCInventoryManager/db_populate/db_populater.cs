@@ -8,7 +8,7 @@ namespace CCInventoryManager.db_populate
 {
     public class db_populater
     {
-        public void populate() 
+        public void populateCustomers() 
         {
             CCINVEntities _db = new CCINVEntities();
             Customer thisCustomer = new Customer();
@@ -44,9 +44,41 @@ namespace CCInventoryManager.db_populate
                     thisCustomer.FirstName = fname;
                     thisCustomer.LastName = lname;
                     thisCustomer.Email = fname + "." + lname + email_add;
-                    _db.Customers.(thisCustomer);
+                    _db.Customers.Add(thisCustomer);
                     _db.SaveChanges();
                 }
+            }
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception e) 
+            {
+                //Do nothing yet
+            }
+        }
+
+        public void populateManufacturers() 
+        {
+            CCINVEntities _db = new CCINVEntities();
+            Manufacturer thisManufacturer = new Manufacturer();
+
+            List<string> Names = new List<string>();
+            Names.Add("America's Cups");
+            Names.Add("Charlie's Cup Emporium");
+            Names.Add("Greenville Cups Inc");
+            Names.Add("Tervis");
+            Names.Add("Paper Products Cupers");
+            Names.Add("Charleston's Cup Company");
+            Names.Add("New York's Cups Inc");
+            Names.Add("Chinese Can Cup");
+            Names.Add("English Tea Cozies");
+
+            foreach (string name in Names) 
+            {
+                thisManufacturer.Name = name;
+                _db.Manufacturers.Add(thisManufacturer);
+                _db.SaveChanges();
             }
             try
             {
