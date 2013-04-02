@@ -65,7 +65,9 @@ namespace CCInventoryManager.Controllers
             {
                 db.OrderItems.Add(orderitem);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index",
+                                        "OrderItem",
+                                        new { Order_ID = orderitem.Order_ID });
             }
 
             ViewBag.Item_ID = new SelectList(db.Items, "ID", "Name", orderitem.Item_ID);
@@ -129,7 +131,7 @@ namespace CCInventoryManager.Controllers
             OrderItem orderitem = db.OrderItems.Find(id);
             db.OrderItems.Remove(orderitem);
             db.SaveChanges();
-            return RedirectToAction("Home", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
         protected override void Dispose(bool disposing)

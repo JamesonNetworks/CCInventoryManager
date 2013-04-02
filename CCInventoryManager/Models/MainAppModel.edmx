@@ -43,6 +43,10 @@
             <End Role="Order" EntitySet="Order" />
             <End Role="OrderItems" EntitySet="OrderItems" />
           </AssociationSet>
+          <AssociationSet Name="FK_PaymentInfo_Customer" Association="CCINVModel.Store.FK_PaymentInfo_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="PaymentInfo" EntitySet="PaymentInfo" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -106,7 +110,7 @@
           <Property Name="City" Type="varchar" MaxLength="50" />
           <Property Name="State" Type="varchar" MaxLength="50" />
           <Property Name="Zip" Type="varchar" MaxLength="50" />
-          <Property Name="Customer_ID" Type="nchar" MaxLength="10" />
+          <Property Name="Customer_ID" Type="int" />
         </EntityType>
         <EntityType Name="Shipper">
           <Key>
@@ -208,6 +212,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PaymentInfo_Customer">
+          <End Role="Customer" Type="CCINVModel.Store.Customer" Multiplicity="0..1" />
+          <End Role="PaymentInfo" Type="CCINVModel.Store.PaymentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PaymentInfo">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -254,6 +270,10 @@
             <End Role="Order" EntitySet="Orders" />
             <End Role="OrderItem" EntitySet="OrderItems" />
           </AssociationSet>
+          <AssociationSet Name="FK_PaymentInfo_Customer" Association="CCINVModel.FK_PaymentInfo_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="PaymentInfo" EntitySet="PaymentInfoes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -264,6 +284,7 @@
           <Property Name="LastName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Orders" Relationship="CCINVModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
+          <NavigationProperty Name="PaymentInfoes" Relationship="CCINVModel.FK_PaymentInfo_Customer" FromRole="Customer" ToRole="PaymentInfo" />
         </EntityType>
         <EntityType Name="Inventory">
           <Key>
@@ -319,8 +340,9 @@
           <Property Name="City" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="State" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Zip" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Customer_ID" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="Customer_ID" Type="Int32" />
           <NavigationProperty Name="Orders" Relationship="CCINVModel.FK_Order_PaymentInfo" FromRole="PaymentInfo" ToRole="Order" />
+          <NavigationProperty Name="Customer" Relationship="CCINVModel.FK_PaymentInfo_Customer" FromRole="PaymentInfo" ToRole="Customer" />
         </EntityType>
         <EntityType Name="Shipper">
           <Key>
@@ -444,6 +466,18 @@
             </Principal>
             <Dependent Role="OrderItem">
               <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentInfo_Customer">
+          <End Type="CCINVModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="CCINVModel.PaymentInfo" Role="PaymentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PaymentInfo">
+              <PropertyRef Name="Customer_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

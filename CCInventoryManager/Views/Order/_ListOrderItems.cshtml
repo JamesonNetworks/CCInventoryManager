@@ -1,0 +1,25 @@
+﻿@model CCInventoryManager.Models.Order
+
+<h2>Order Items</h2>
+
+<table>
+    <thead>
+        <tr><td>Name</td><td>Quantity</td><td>Manufacturer</td></tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.OrderItems)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Item.Manufacturer.Name)
+        </td>
+    </tr>
+    }
+    </tbody>
+</table>

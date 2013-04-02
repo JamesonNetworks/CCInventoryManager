@@ -17,6 +17,7 @@ namespace CCInventoryManager.Models
         public Customer()
         {
             this.Orders = new HashSet<Order>();
+            this.PaymentInfoes = new HashSet<PaymentInfo>();
         }
     
         public int ID { get; set; }
@@ -25,5 +26,6 @@ namespace CCInventoryManager.Models
         public string Email { get; set; }
     
         public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<PaymentInfo> PaymentInfoes { get; set; }
     }
 }

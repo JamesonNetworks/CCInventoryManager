@@ -10,34 +10,45 @@
     <legend>Order</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Customer.FirstName)
+         Customer First Name
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Customer.FirstName)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Shipper.Name)
+         Customer Last Name
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Customer.LastName)
+    </div>
+
+    <div class="display-label">
+         Customer ID
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Customer.ID)
+    </div>
+
+    <div class="display-label">
+         Shipping Company
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Shipper.Name)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.PaymentInfo.Method)
+         Payment Method
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.PaymentInfo.Method)
     </div>
 </fieldset>
+
+@Html.Partial("_ListOrderItems")
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
 
-@Html.ActionLink("See the Order Items",
-                    "Index",
-                    "OrderItem",
-                    new { Order_ID = Model.ID },
-                    null
-                    )

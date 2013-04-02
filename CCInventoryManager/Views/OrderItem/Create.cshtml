@@ -10,7 +10,7 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>OrderItem</legend>
+        <legend>Order Item</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Item_ID, "Item")
@@ -18,6 +18,13 @@
         <div class="editor-field">
             @Html.DropDownList("Item_ID", String.Empty)
             @Html.ValidationMessageFor(model => model.Item_ID)
+        </div>        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Quantity, "Quantity")
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("Quantity", String.Empty)
+            @Html.ValidationMessageFor(model => model.Quantity)
         </div>
 
         <p>
