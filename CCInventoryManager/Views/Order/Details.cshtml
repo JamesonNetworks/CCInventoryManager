@@ -1,0 +1,36 @@
+﻿@model CCInventoryManager.Models.Order
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Order</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Customer.FirstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Customer.FirstName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Shipper.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Shipper.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PaymentInfo.Method)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PaymentInfo.Method)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

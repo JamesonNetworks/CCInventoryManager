@@ -31,42 +31,22 @@ namespace CCInventoryManager.Controllers
 
         public ActionResult ManageOrders()
         {
-            var query = from o in _db.Orders
-                        select o;
-
-            List<Order> AllOrders = query.ToList();
-
-            return View(AllOrders);
+            return RedirectToAction("Index", "Order");
         }
 
         public ActionResult ManageItems()
         {
-            var query = from i in _db.Items
-                        join man in _db.Manufacturers on i.Manufacturer_ID equals man.ID
-                        select i;
-
-            List<Item> AllItems = query.ToList();
-
-            return View(AllItems);
+            return RedirectToAction("Index", "Item");
         }
 
         public ActionResult ManageManufacturers()
         {
-            var query = from m in _db.Manufacturers
-                        select m;
-            List<Manufacturer> AllMan = query.ToList();
-
-            return View(AllMan);
+            return RedirectToAction("Index", "Manufacturer");
         }
 
         public ActionResult ManageCustomers()
         {
-            var query = from c in _db.Customers
-                        orderby c.LastName
-                        select c;
-            List<Customer> AllCust = query.ToList();
-
-            return View(AllCust);
+            return RedirectToAction("Index", "Customer");
         }
     }
 }
