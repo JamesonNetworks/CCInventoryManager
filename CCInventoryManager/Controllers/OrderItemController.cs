@@ -16,9 +16,10 @@ namespace CCInventoryManager.Controllers
         //
         // GET: /OrderItem/
 
-        public ActionResult Index()
+        public ActionResult Index(int Order_ID)
         {
-            var orderitems = db.OrderItems.Include(o => o.Item).Include(o => o.Order);
+            var orderitems = db.OrderItems.Include(o => o.Item).Include(o => o.Order).Where(o => o.Order_ID == Order_ID);
+            ViewBag.currentOrder = Order_ID;
             return View(orderitems.ToList());
         }
 
@@ -32,6 +33,7 @@ namespace CCInventoryManager.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.currentOrder = id;
             return View(orderitem);
         }
 
@@ -49,6 +51,7 @@ namespace CCInventoryManager.Controllers
         {
             ViewBag.Order_ID = Order_ID;
             ViewBag.Item_ID = new SelectList(db.Items, "ID", "Name");
+            ViewBag.currentOrder = Order_ID;
             return View();
         }
 
@@ -82,6 +85,7 @@ namespace CCInventoryManager.Controllers
             }
             ViewBag.Item_ID = new SelectList(db.Items, "ID", "Name", orderitem.Item_ID);
             ViewBag.Order_ID = new SelectList(db.Orders, "ID", "ID", orderitem.Order_ID);
+            ViewBag.currentOrder = id;
             return View(orderitem);
         }
 
@@ -99,6 +103,7 @@ namespace CCInventoryManager.Controllers
             }
             ViewBag.Item_ID = new SelectList(db.Items, "ID", "Name", orderitem.Item_ID);
             ViewBag.Order_ID = new SelectList(db.Orders, "ID", "ID", orderitem.Order_ID);
+            ViewBag.currentOrder = orderitem.Order_ID;
             return View(orderitem);
         }
 
@@ -124,7 +129,7 @@ namespace CCInventoryManager.Controllers
             OrderItem orderitem = db.OrderItems.Find(id);
             db.OrderItems.Remove(orderitem);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Home", "Home");
         }
 
         protected override void Dispose(bool disposing)
