@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CCInventoryManager.Models.Customer>
 
 @{
-    ViewBag.Title = "ManageCustomers";
+    ViewBag.Title = "Manage Customers";
 }
 
 <h2>Manage Customers</h2>
@@ -10,16 +10,16 @@
     <thead>
         <tr>
             <th>
-                Customer ID
+                Customer Last Name
             </th>
             <th>
                 Customer First Name
             </th>
             <th>
-                Customer Last Name
+                Customer Email
             </th>
             <th>
-                Customer Email
+                Customer ID
             </th>
         </tr>
     </thead>
@@ -27,18 +27,20 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelM => c.ID)
+                @Html.DisplayFor(modelM => c.LastName)
             </td>
             <td>
                 @Html.DisplayFor(modelM => c.FirstName)
             </td>
             <td>
-                @Html.DisplayFor(modelM => c.LastName)
+                @Html.DisplayFor(modelM => c.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelM => c.Email)
+                @Html.DisplayFor(modelM => c.ID)
             </td>
         </tr>
     }
 
 </table>
+
+@{ Html.RenderPartial("_RenderTable"); }

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CCInventoryManager.Models.Manufacturer>
 
 @{
-    ViewBag.Title = "ManageManufacturers";
+    ViewBag.Title = "Manage Manufacturers";
 }
 
 <h2>Manage Manufacturers</h2>
@@ -24,3 +24,5 @@
     }
 
 </table>
+
+@{ Html.RenderPartial("_RenderTable"); }
