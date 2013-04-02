@@ -1,0 +1,44 @@
+﻿@model IEnumerable<CCInventoryManager.Models.Customer>
+
+@{
+    ViewBag.Title = "ManageCustomers";
+}
+
+<h2>Manage Customers</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>
+                Customer ID
+            </th>
+            <th>
+                Customer First Name
+            </th>
+            <th>
+                Customer Last Name
+            </th>
+            <th>
+                Customer Email
+            </th>
+        </tr>
+    </thead>
+    @foreach(var c in Model) 
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelM => c.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelM => c.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelM => c.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelM => c.Email)
+            </td>
+        </tr>
+    }
+
+</table>

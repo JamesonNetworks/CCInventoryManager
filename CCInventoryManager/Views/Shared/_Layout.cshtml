@@ -12,18 +12,17 @@
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+                    <p class="site-title">@Html.ActionLink("Return Home", "Index", "Home")</p>
                 </div>
                 <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
                     <nav>
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Orders", "ManageOrders", "Home")</li>
+                            <li>@Html.ActionLink("Items", "ManageItems", "Home")</li>
+                            <li>@Html.ActionLink("Manufacturers", "ManageManufacturers", "Home")</li>
+                            <li>@Html.ActionLink("Customers", "ManageCustomers", "Home")</li>
                             <li>@Html.ActionLink("Populate", "Populate", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         </ul>
                     </nav>
                 </div>
@@ -38,7 +37,7 @@
         <footer>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                    <p>&copy; @DateTime.Now.Year - Charleston Incorporated Cups.</p>
                 </div>
             </div>
         </footer>

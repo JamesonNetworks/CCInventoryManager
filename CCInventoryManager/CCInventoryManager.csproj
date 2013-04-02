@@ -344,6 +344,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Populate.cshtml" />
+    <Content Include="Views\Home\ListOrders.cshtml" />
+    <Content Include="Views\Home\CreateOrders.cshtml" />
+    <Content Include="Views\Home\ManageOrders.cshtml" />
+    <Content Include="Views\Home\ManageItems.cshtml" />
+    <Content Include="Views\Home\ManageManufacturers.cshtml" />
+    <Content Include="Views\Home\ManageCustomers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

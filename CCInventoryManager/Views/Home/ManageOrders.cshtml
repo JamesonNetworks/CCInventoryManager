@@ -1,0 +1,28 @@
+﻿@model IEnumerable<CCInventoryManager.Models.Order>
+
+@{
+    ViewBag.Title = "Manage Orders";
+}
+
+<h2>ManageOrders</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>
+                Order #
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+    @foreach(var o in Model) 
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelO => o.ID)
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

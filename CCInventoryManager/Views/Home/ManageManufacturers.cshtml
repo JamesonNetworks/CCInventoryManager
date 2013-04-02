@@ -1,0 +1,26 @@
+﻿@model IEnumerable<CCInventoryManager.Models.Manufacturer>
+
+@{
+    ViewBag.Title = "ManageManufacturers";
+}
+
+<h2>Manage Manufacturers</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>
+                Manufacturer Name
+            </th>
+        </tr>
+    </thead>
+    @foreach(var m in Model) 
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelM => m.Name)
+            </td>
+        </tr>
+    }
+
+</table>
