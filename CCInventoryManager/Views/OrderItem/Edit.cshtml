@@ -1,0 +1,45 @@
+﻿@model CCInventoryManager.Models.OrderItem
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>OrderItem</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Item_ID, "Item")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Item_ID", String.Empty)
+            @Html.ValidationMessageFor(model => model.Item_ID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Order_ID, "Order")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Order_ID", String.Empty)
+            @Html.ValidationMessageFor(model => model.Order_ID)
+        </div>
+
+        @Html.HiddenFor(model => model.ID)
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

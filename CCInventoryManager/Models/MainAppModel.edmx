@@ -94,6 +94,7 @@
           <Property Name="Item_ID" Type="int" />
           <Property Name="Order_ID" Type="int" />
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="int" />
         </EntityType>
         <EntityType Name="PaymentInfo">
           <Key>
@@ -420,6 +421,7 @@
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Item" Relationship="CCINVModel.FK_OrderItems_Item" FromRole="OrderItem" ToRole="Item" />
           <NavigationProperty Name="Order" Relationship="CCINVModel.FK_OrderItems_Order" FromRole="OrderItem" ToRole="Order" />
+          <Property Type="Int32" Name="Quantity" />
         </EntityType>
         <Association Name="FK_OrderItems_Item">
           <End Type="CCINVModel.Item" Role="Item" Multiplicity="0..1" />
@@ -533,6 +535,7 @@
           <EntitySetMapping Name="OrderItems">
             <EntityTypeMapping TypeName="CCINVModel.OrderItem">
               <MappingFragment StoreEntitySet="OrderItems">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
                 <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />

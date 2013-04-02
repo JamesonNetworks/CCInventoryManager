@@ -17,6 +17,7 @@ namespace CCInventoryManager.Models
         public Nullable<int> Item_ID { get; set; }
         public Nullable<int> Order_ID { get; set; }
         public int ID { get; set; }
+        public Nullable<int> Quantity { get; set; }
     
         public virtual Item Item { get; set; }
         public virtual Order Order { get; set; }

@@ -169,6 +169,8 @@
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ManufacturerController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\OrderItemController.cs" />
+    <Compile Include="Controllers\ShipperController.cs" />
     <Compile Include="db_populate\db_populater.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -388,6 +390,16 @@
     <Content Include="Views\Manufacturer\Create.cshtml" />
     <Content Include="Views\Manufacturer\Edit.cshtml" />
     <Content Include="Views\Manufacturer\Delete.cshtml" />
+    <Content Include="Views\Shipper\Index.cshtml" />
+    <Content Include="Views\Shipper\Details.cshtml" />
+    <Content Include="Views\Shipper\Create.cshtml" />
+    <Content Include="Views\Shipper\Edit.cshtml" />
+    <Content Include="Views\Shipper\Delete.cshtml" />
+    <Content Include="Views\OrderItem\Index.cshtml" />
+    <Content Include="Views\OrderItem\Details.cshtml" />
+    <Content Include="Views\OrderItem\Create.cshtml" />
+    <Content Include="Views\OrderItem\Edit.cshtml" />
+    <Content Include="Views\OrderItem\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

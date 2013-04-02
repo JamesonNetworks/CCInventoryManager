@@ -48,5 +48,9 @@ namespace CCInventoryManager.Controllers
         {
             return RedirectToAction("Index", "Customer");
         }
+        public ActionResult ManageShippers()
+        {
+            return RedirectToAction("Index", "Shipper");
+        }
     }
 }

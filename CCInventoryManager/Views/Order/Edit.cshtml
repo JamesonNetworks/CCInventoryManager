@@ -45,6 +45,14 @@
 }
 
 <div>
+    @Html.ActionLink("Add an Item",
+                     "Create",
+                     "OrderItem",
+                     new { Order_ID = Model.ID },
+                     null )
+</div>
+
+<div>
     @Html.ActionLink("Back to List", "Index")
 </div>
 
