@@ -50,7 +50,17 @@ namespace CCInventoryManager.Controllers
         public ActionResult Create(int Order_ID)
         {
             ViewBag.Order_ID = Order_ID;
-            ViewBag.Item_ID = new SelectList(db.Items, "ID", "Name");
+
+            var items = db.Items;
+            List<object> newList = new List<object>();
+            foreach (var i in items)
+                newList.Add(new
+                {
+                    Id = i.ID,
+                    Name = i.Name + " - from - " + i.Manufacturer.Name
+                });
+            this.ViewData["Item_ID"] = new SelectList(newList, "Id", "Name");
+
             ViewBag.currentOrder = Order_ID;
             return View();
         }

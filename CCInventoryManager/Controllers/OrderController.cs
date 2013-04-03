@@ -40,9 +40,19 @@ namespace CCInventoryManager.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.Customer_ID = new SelectList(db.Customers, "ID", "ID");
             ViewBag.PaymentInfo_ID = new SelectList(db.PaymentInfoes, "ID", "Method");
             ViewBag.Shipper_ID = new SelectList(db.Shippers, "ID", "Name");
+
+            var customers = db.Customers;
+            List<object> newList = new List<object>();
+            foreach (var c in customers)
+                newList.Add(new
+                {
+                    Id = c.ID,
+                    Name = c.FirstName + " " + c.LastName
+                });
+            this.ViewData["Customer_ID"] = new SelectList(newList, "Id", "Name");
+
             return View();
         }
 
