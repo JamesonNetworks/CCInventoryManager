@@ -27,6 +27,17 @@ namespace CCInventoryManager.Controllers
 
         public ActionResult Details(int id = 0)
         {
+            var items = db.Items;
+            List<object> newList = new List<object>();
+            foreach (var i in items)
+                newList.Add(new
+                {
+                    Id = i.ID,
+                    Name = i.Name + " - from - " + i.Manufacturer.Name
+                });
+            this.ViewData["Item_ID"] = new SelectList(newList, "Id", "Name");
+            ViewData["this_order_id"] = id;
+
             Order order = db.Orders.Find(id);
             if (order == null)
             {
@@ -132,6 +143,21 @@ namespace CCInventoryManager.Controllers
             db.Orders.Remove(order);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult AddItem(OrderItem oi)
+        {
+            if (ModelState.IsValid)
+            {
+                db.OrderItems.Add(oi);
+                db.SaveChanges();
+                return RedirectToAction("Details",
+                                        "Order",
+                                        new { ID = oi.Order_ID });
+            }
+
+            return PartialView("_AddOrderItem", oi);
         }
 
         protected override void Dispose(bool disposing)

@@ -46,6 +46,7 @@
 </fieldset>
 
 @Html.Partial("_ListOrderItems")
+@Html.Partial("_AddOrderItem", new CCInventoryManager.Models.OrderItem())
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |

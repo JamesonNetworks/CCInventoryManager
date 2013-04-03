@@ -1,1 +1,38 @@
-﻿
+﻿@model CCInventoryManager.Models.OrderItem
+
+@using (Ajax.BeginForm("AddItem", "Order", new { Order_ID = ViewData["this_order_id"]}, 
+        new AjaxOptions 
+        {
+            UpdateTargetId = "ItemsDiv",
+            HttpMethod = "post"
+        }, new { id = "ajaxForm"})) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Order Item</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Item_ID, "Item")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Item_ID", String.Empty)
+            @Html.ValidationMessageFor(model => model.Item_ID)
+        </div>        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Quantity, "Quantity")
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("Quantity", String.Empty)
+            @Html.ValidationMessageFor(model => model.Quantity)
+        </div>
+            <input type="submit" value="Add" />
+    </fieldset>
+}
+
+<script>
+    $(function () {
+        $('form#ajaxForm').find('a.submit-link').click(function () {
+            $('form#ajaxForm').trigger('submit');
+        }).show();
+    });
+ </script>
