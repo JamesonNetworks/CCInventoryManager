@@ -9,38 +9,24 @@
 <fieldset>
     <legend>Order</legend>
 
-    <div class="display-label">
-         Customer First Name
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Customer.FirstName)
-    </div>
-
-    <div class="display-label">
-         Customer Last Name
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Customer.LastName)
-    </div>
-
-    <div class="display-label">
-         Customer ID
-    </div>
-    <div class="display-field">
+    <div class="itemrow">
+        <strong>Customer ID: </strong>
         @Html.DisplayFor(model => model.Customer.ID)
     </div>
-
-    <div class="display-label">
-         Shipping Company
+    <div class="itemrow">
+        <strong>First Name: </strong>
+        @Html.DisplayFor(model => model.Customer.FirstName)
     </div>
-    <div class="display-field">
+    <div class="itemrow">
+        <strong>Last Name: </strong>
+        @Html.DisplayFor(model => model.Customer.LastName)
+    </div>
+    <div class="itemrow">
+        <strong>Shipping Company: </strong>
         @Html.DisplayFor(model => model.Shipper.Name)
     </div>
-
-    <div class="display-label">
-         Payment Method
-    </div>
-    <div class="display-field">
+    <div class="itemrow">
+        <strong>Payment Method: </strong>
         @Html.DisplayFor(model => model.PaymentInfo.Method)
     </div>
 </fieldset>
@@ -49,7 +35,7 @@
 @Html.Partial("_AddOrderItem", new CCInventoryManager.Models.OrderItem())
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
 
