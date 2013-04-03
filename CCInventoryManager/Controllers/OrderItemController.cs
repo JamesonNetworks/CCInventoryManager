@@ -139,9 +139,10 @@ namespace CCInventoryManager.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             OrderItem orderitem = db.OrderItems.Find(id);
+            var order_id = orderitem.Order_ID;
             db.OrderItems.Remove(orderitem);
             db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Details", "Order", new { id = order_id});
         }
 
         protected override void Dispose(bool disposing)

@@ -20,7 +20,7 @@
             @Html.DisplayFor(modelItem => item.Item.Manufacturer.Name)
         </td>
         <td>
-             Edit | Remove
+            @Html.ActionLink("Delete", "Delete", "OrderItem", new { id=item.ID }, null)
         </td>
     </tr>
     }
