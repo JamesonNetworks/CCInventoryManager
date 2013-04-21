@@ -24,6 +24,8 @@ namespace CCInventoryManager.Models
         public Nullable<int> Manufacturer_ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public Nullable<decimal> Cost { get; set; }
+        public Nullable<decimal> RetailCost { get; set; }
     
         public virtual ICollection<Inventory> Inventories { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }

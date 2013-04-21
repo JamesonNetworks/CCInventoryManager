@@ -26,6 +26,7 @@ namespace CCInventoryManager.Models
         public string State { get; set; }
         public string Zip { get; set; }
         public Nullable<int> Customer_ID { get; set; }
+        public string Address { get; set; }
     
         public virtual ICollection<Order> Orders { get; set; }
         public virtual Customer Customer { get; set; }

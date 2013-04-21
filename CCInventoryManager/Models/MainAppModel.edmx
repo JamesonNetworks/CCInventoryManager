@@ -74,6 +74,8 @@
           <Property Name="Manufacturer_ID" Type="int" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Cost" Type="numeric" Scale="2" />
+          <Property Name="RetailCost" Type="numeric" Scale="2" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
@@ -90,6 +92,8 @@
           <Property Name="Customer_ID" Type="int" />
           <Property Name="Shipper_ID" Type="int" />
           <Property Name="PaymentInfo_ID" Type="int" />
+          <Property Name="DateArrived" Type="datetime" />
+          <Property Name="DateOrdered" Type="datetime" />
         </EntityType>
         <EntityType Name="OrderItems">
           <Key>
@@ -111,6 +115,7 @@
           <Property Name="State" Type="varchar" MaxLength="50" />
           <Property Name="Zip" Type="varchar" MaxLength="50" />
           <Property Name="Customer_ID" Type="int" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Shipper">
           <Key>
@@ -118,6 +123,10 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="255" />
+          <Property Name="Phone" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Warehouse">
           <Key>
@@ -308,6 +317,8 @@
           <NavigationProperty Name="Inventories" Relationship="CCINVModel.FK_Inventory_Item" FromRole="Item" ToRole="Inventory" />
           <NavigationProperty Name="Manufacturer" Relationship="CCINVModel.FK_Item_Manufacturer" FromRole="Item" ToRole="Manufacturer" />
           <NavigationProperty Name="OrderItems" Relationship="CCINVModel.FK_OrderItems_Item" FromRole="Item" ToRole="OrderItem" />
+          <Property Type="Decimal" Name="Cost" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="RetailCost" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
@@ -329,6 +340,8 @@
           <NavigationProperty Name="PaymentInfo" Relationship="CCINVModel.FK_Order_PaymentInfo" FromRole="Order" ToRole="PaymentInfo" />
           <NavigationProperty Name="Shipper" Relationship="CCINVModel.FK_Order_Shipper" FromRole="Order" ToRole="Shipper" />
           <NavigationProperty Name="OrderItems" Relationship="CCINVModel.FK_OrderItems_Order" FromRole="Order" ToRole="OrderItem" />
+          <Property Type="DateTime" Name="DateArrived" Precision="3" />
+          <Property Type="DateTime" Name="DateOrdered" Precision="3" />
         </EntityType>
         <EntityType Name="PaymentInfo">
           <Key>
@@ -343,6 +356,7 @@
           <Property Name="Customer_ID" Type="Int32" />
           <NavigationProperty Name="Orders" Relationship="CCINVModel.FK_Order_PaymentInfo" FromRole="PaymentInfo" ToRole="Order" />
           <NavigationProperty Name="Customer" Relationship="CCINVModel.FK_PaymentInfo_Customer" FromRole="PaymentInfo" ToRole="Customer" />
+          <Property Type="String" Name="Address" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Shipper">
           <Key>
@@ -351,6 +365,10 @@
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Orders" Relationship="CCINVModel.FK_Order_Shipper" FromRole="Shipper" ToRole="Order" />
+          <Property Type="String" Name="FirstName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Phone" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Warehouse">
           <Key>
@@ -510,6 +528,8 @@
           <EntitySetMapping Name="Items">
             <EntityTypeMapping TypeName="CCINVModel.Item">
               <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="RetailCost" ColumnName="RetailCost" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Manufacturer_ID" ColumnName="Manufacturer_ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -528,6 +548,8 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="CCINVModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="DateOrdered" ColumnName="DateOrdered" />
+                <ScalarProperty Name="DateArrived" ColumnName="DateArrived" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
                 <ScalarProperty Name="Shipper_ID" ColumnName="Shipper_ID" />
@@ -538,6 +560,7 @@
           <EntitySetMapping Name="PaymentInfoes">
             <EntityTypeMapping TypeName="CCINVModel.PaymentInfo">
               <MappingFragment StoreEntitySet="PaymentInfo">
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Method" ColumnName="Method" />
                 <ScalarProperty Name="CC" ColumnName="CC" />
@@ -551,6 +574,10 @@
           <EntitySetMapping Name="Shippers">
             <EntityTypeMapping TypeName="CCINVModel.Shipper">
               <MappingFragment StoreEntitySet="Shipper">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>

@@ -23,6 +23,8 @@ namespace CCInventoryManager.Models
         public Nullable<int> Customer_ID { get; set; }
         public Nullable<int> Shipper_ID { get; set; }
         public Nullable<int> PaymentInfo_ID { get; set; }
+        public Nullable<System.DateTime> DateArrived { get; set; }
+        public Nullable<System.DateTime> DateOrdered { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual PaymentInfo PaymentInfo { get; set; }
