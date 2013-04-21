@@ -1,0 +1,34 @@
+﻿@model CCInventoryManager.Models.Customer
+
+<h2>Payment Items</h2>
+
+<table>
+    <thead>
+        <tr><td>Method</td><td>CC Number</td><td>City</td><td>State</td><td>Zip</td><td></td></tr>
+    </thead>
+    <tbody>
+    @foreach (var paymentInfo in Model.PaymentInfoes)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => paymentInfo.Method)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => paymentInfo.CC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => paymentInfo.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => paymentInfo.State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => paymentInfo.Zip)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", "PaymentInfo", new { id=paymentInfo.ID }, null)
+        </td>
+    </tr>
+    }
+    </tbody>
+</table>

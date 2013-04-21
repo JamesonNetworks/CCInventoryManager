@@ -96,8 +96,16 @@ namespace CCInventoryManager.Controllers
             {
                 return HttpNotFound();
             }
+            var paymentOptions = db.PaymentInfoes.Where(x => x.Customer_ID == order.Customer_ID);
+            List<object> newList = new List<object>();
+            foreach (var po in paymentOptions)
+                newList.Add(new
+                {
+                    Id = po.ID,
+                    Name = po.Method + " on " + po.CC
+                });
+            ViewBag.PaymentInfo_ID = new SelectList(newList, "Id", "Name");
             ViewBag.Customer_ID = new SelectList(db.Customers, "ID", "ID", order.Customer_ID);
-            ViewBag.PaymentInfo_ID = new SelectList(db.PaymentInfoes, "ID", "Method", order.PaymentInfo_ID);
             ViewBag.Shipper_ID = new SelectList(db.Shippers, "ID", "Name", order.Shipper_ID);
             return View(order);
         }

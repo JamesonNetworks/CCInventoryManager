@@ -26,6 +26,16 @@ namespace CCInventoryManager.Controllers
 
         public ActionResult Details(int id = 0)
         {
+            var paymentOptions = db.PaymentInfoes.Where(x => x.Customer_ID == id) ;
+            List<object> newList = new List<object>();
+            foreach (var po in paymentOptions)
+                newList.Add(new
+                {
+                    Id = po.ID,
+                    Name = po.Method + " on XXXXXXXXXXXX" + po.CC
+                });
+            this.ViewData["Payment_ID"] = new SelectList(newList, "Id", "Name");
+            ViewData["this_customer_id"] = id;
             Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
@@ -109,6 +119,21 @@ namespace CCInventoryManager.Controllers
             db.Customers.Remove(customer);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult AddPayment(PaymentInfo pi)
+        {
+            if (ModelState.IsValid)
+            {
+                db.PaymentInfoes.Add(pi);
+                db.SaveChanges();
+                return RedirectToAction("Details",
+                                        "Customer",
+                                        new { ID = pi.Customer_ID });
+            }
+
+            return PartialView("_AddPaymentInfo", pi);
         }
 
         protected override void Dispose(bool disposing)

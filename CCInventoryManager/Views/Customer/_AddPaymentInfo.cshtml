@@ -1,0 +1,59 @@
+﻿@model CCInventoryManager.Models.PaymentInfo
+
+@using (Ajax.BeginForm("AddPayment", "Customer", new { Customer_ID = ViewData["this_customer_id"]}, 
+        new AjaxOptions 
+        {
+            UpdateTargetId = "PaymentDiv",
+            HttpMethod = "post"
+        }, new { id = "ajaxForm"})) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Payment Info</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Method, "Method of Payment")
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("Method", String.Empty)
+            @Html.ValidationMessageFor(model => model.Method)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CC, "Credit Card Number")
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("CC", String.Empty)
+            @Html.ValidationMessageFor(model => model.CC)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.City, "City")
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("City", String.Empty)
+            @Html.ValidationMessageFor(model => model.City)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.City, "State")
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("State", String.Empty)
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.City, "Zip")
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("Zip", String.Empty)
+            @Html.ValidationMessageFor(model => model.Zip)
+        </div>
+            <input type="submit" value="Add" />
+    </fieldset>
+}
+
+<script>
+    $(function () {
+        $('form#ajaxForm').find('a.submit-link').click(function () {
+            $('form#ajaxForm').trigger('submit');
+        }).show();
+    });
+ </script>

@@ -30,6 +30,10 @@
         @Html.DisplayFor(model => model.Email)
     </div>
 </fieldset>
+
+@Html.Partial("_ListPaymentInfo")
+@Html.Partial("_AddPaymentInfo", new CCInventoryManager.Models.PaymentInfo())
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
